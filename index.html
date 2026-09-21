@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free professional QR Code Generator. Create customizable QR codes for URLs, text, Wi-Fi, email, phone, WhatsApp and more.">
+  <meta name="theme-color" content="#0b1020">
+  <title>QR Studio — Free QR Code Generator</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script defer src="js/lang.js"></script><script defer src="js/app.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QR Studio","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","description":"Free QR code generator and scanner."}</script><link rel="alternate" hreflang="en" href="./index.html"><link rel="alternate" hreflang="bn" href="./lang/bn/index.html"><link rel="alternate" hreflang="hi" href="./lang/hi/index.html"><link rel="alternate" hreflang="ar" href="./lang/ar/index.html"><link rel="alternate" hreflang="es" href="./lang/es/index.html"><link rel="alternate" hreflang="fr" href="./lang/fr/index.html"><link rel="alternate" hreflang="de" href="./lang/de/index.html"><link rel="alternate" hreflang="pt" href="./lang/pt/index.html"><link rel="alternate" hreflang="id" href="./lang/id/index.html"><link rel="alternate" hreflang="tr" href="./lang/tr/index.html"><link rel="alternate" hreflang="it" href="./lang/it/index.html"><link rel="alternate" hreflang="nl" href="./lang/nl/index.html"><link rel="alternate" hreflang="pl" href="./lang/pl/index.html"><link rel="alternate" hreflang="ru" href="./lang/ru/index.html"><link rel="alternate" hreflang="uk" href="./lang/uk/index.html"><link rel="alternate" hreflang="vi" href="./lang/vi/index.html"><link rel="alternate" hreflang="th" href="./lang/th/index.html"><link rel="alternate" hreflang="ko" href="./lang/ko/index.html"><link rel="alternate" hreflang="ja" href="./lang/ja/index.html"><link rel="alternate" hreflang="zh-CN" href="./lang/zh-CN/index.html"><link rel="alternate" hreflang="zh-TW" href="./lang/zh-TW/index.html"><link rel="alternate" hreflang="ta" href="./lang/ta/index.html"><link rel="alternate" hreflang="ur" href="./lang/ur/index.html"><link rel="alternate" hreflang="fa" href="./lang/fa/index.html"><link rel="alternate" hreflang="x-default" href="./index.html"></head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#">
+        <span class="brand-mark">QR</span>
+        <span>QR Studio</span>
+      </a>
+      <nav>
+        <a href="#generator" data-i18n="nav_generator">Generator</a>
+        <a href="#features" data-i18n="nav_features">Features</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div>
+        <span class="eyebrow" data-i18n="hero_eyebrow">100% FREE • NO SIGN-UP</span>
+        <h1 data-i18n="hero_title">Create beautiful QR codes in seconds.</h1>
+        <p data-i18n="hero_desc">Generate customizable QR codes for links, text, Wi-Fi, email, phone numbers and WhatsApp. Everything runs in your browser.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#generator" data-i18n="create">Create QR Code</a>
+          <a class="btn btn-secondary" href="#features" data-i18n="explore">Explore features</a>
+        </div>
+        <div class="trust-row">
+          <span>✓ <span data-i18n="no_account">No account</span></span><span>✓ <span data-i18n="no_server">No server required</span></span><span>✓ <span data-i18n="png">Download PNG</span></span><span>✓ <span data-i18n="svg">Download SVG</span></span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="mini-label" data-i18n="live_preview">LIVE PREVIEW</div>
+        <div class="hero-qr" id="heroQr"></div>
+        <div class="hero-card-text"><strong data-i18n="scan_me">Scan me</strong><span data-i18n="local">Your QR is generated locally.</span></div>
+      </div>
+    </section>
+
+    <section class="container generator-section" id="generator">
+      <div class="section-heading">
+        <span class="eyebrow" data-i18n="generator_eyebrow">QR GENERATOR</span>
+        <h2 data-i18n="generator_title">Design your QR code</h2>
+        <p data-i18n="generator_desc">Choose a type, customize the look, then download your QR code.</p>
+      </div>
+
+      <div class="generator-layout">
+        <div class="panel controls">
+          <div class="panel-title-row"><h3 data-i18n="content">Content</h3><span class="step">01</span></div>
+
+          <label class="field-label" for="qrType" data-i18n="qr_type">QR type</label>
+          <select id="qrType" class="input">
+            <option value="url">Website URL</option>
+            <option value="text">Plain text</option>
+            <option value="wifi">Wi-Fi</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+            <option value="whatsapp">WhatsApp</option>
+          </select>
+
+          <div id="dynamicFields"></div>
+
+          <div class="divider"></div>
+          <div class="panel-title-row"><h3 data-i18n="style">Style</h3><span class="step">02</span></div>
+
+          <div class="two-col">
+            <div>
+              <label class="field-label" for="foreground" data-i18n="qr_color">QR color</label>
+              <div class="color-input"><input id="foreground" type="color" value="#111827"><span id="fgHex">#111827</span></div>
+            </div>
+            <div>
+              <label class="field-label" for="background" data-i18n="background">Background</label>
+              <div class="color-input"><input id="background" type="color" value="#ffffff"><span id="bgHex">#FFFFFF</span></div>
+            </div>
+          </div>
+          <label class="field-label" data-i18n="gradient">Gradient</label>
+          <div class="two-col">
+            <div><label class="field-label" for="gradientEnd" data-i18n="end_color">End color</label><div class="color-input"><input id="gradientEnd" type="color" value="#6d5dfc"><span id="gradientHex">#6D5DFC</span></div></div>
+            <div><label class="field-label" for="gradientAngle" data-i18n="angle">Angle</label><select id="gradientAngle" class="input"><option value="0" data-i18n="horizontal">Horizontal</option><option value="45" data-i18n="diagonal">Diagonal</option><option value="90" data-i18n="vertical">Vertical</option></select></div>
+          </div>
+          <label class="field-label" for="shape" data-i18n="shape">QR shape</label>
+          <select id="shape" class="input"><option value="square" data-i18n="square">Square</option><option value="rounded" data-i18n="rounded">Rounded</option><option value="dots" data-i18n="dots">Dots</option></select>
+
+          <label class="field-label" for="size">Size: <span id="sizeValue">320px</span></label>
+          <input id="size" class="range" type="range" min="180" max="640" value="320">
+
+          <label class="field-label" for="margin">Margin: <span id="marginValue">12px</span></label>
+          <input id="margin" class="range" type="range" min="0" max="32" value="12">
+
+          <label class="field-label" for="errorCorrection" data-i18n="error">Error correction</label>
+          <select id="errorCorrection" class="input">
+            <option value="L">Low — 7%</option>
+            <option value="M" selected>Medium — 15%</option>
+            <option value="Q">Quartile — 25%</option>
+            <option value="H">High — 30%</option>
+          </select>
+
+          <label class="field-label" for="logo" data-i18n="logo">Center logo <span class="optional" data-i18n="optional">optional</span></label>
+          <input id="logo" class="input file-input" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml">
+          <button class="text-btn" id="removeLogo" type="button" data-i18n="remove">Remove logo</button>
+
+          <div class="divider"></div>
+          <div class="panel-title-row"><h3 data-i18n="output">Output</h3><span class="step">03</span></div>
+          <div class="download-grid">
+            <button class="btn btn-primary" id="downloadPng" data-i18n="png">Download PNG</button>
+            <button class="btn btn-secondary" id="downloadSvg" data-i18n="svg">Download SVG</button>
+            <button class="btn btn-secondary" id="downloadPdf" data-i18n="pdf">Print / PDF</button>
+          </div>
+          <p class="small-note" data-i18n="note">For logos, High error correction is recommended. Always test-scan before printing.</p>
+        </div>
+
+        <div class="panel preview-panel">
+          <div class="preview-top"><div><span class="mini-label" data-i18n="preview">PREVIEW</span><h3 data-i18n="your_qr">Your QR code</h3></div><span class="live-dot">● <span data-i18n="live">Live</span></span></div>
+          <div class="qr-stage" id="qrStage">
+            <div id="qrcode"></div>
+            <div class="qr-placeholder" id="qrPlaceholder">Generating…</div>
+          </div>
+          <div class="preview-meta"><span id="payloadPreview">https://example.com</span><button class="copy-btn" id="copyPayload" data-i18n="copy">Copy</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features container" id="features">
+      <div class="section-heading centered">
+        <span class="eyebrow" data-i18n="features_eyebrow">BUILT FOR EVERYDAY USE</span>
+        <h2 data-i18n="features_title">Everything you need, nothing you don't.</h2>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></span><h3 data-i18n="instant">Instant generation</h3><p data-i18n="instant_desc">QR codes update immediately as you edit your content or style.</p></article>
+        <article class="feature-card"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 9 9-9 9-9-9 9-9Z"/><path d="m8.5 8.5 7 7M15.5 8.5l-7 7"/></svg></span><h3 data-i18n="custom">Custom styling</h3><p data-i18n="custom_desc">Change colors, gradients, shapes, size, margins and error correction.</p></article>
+        <article class="feature-card"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><h3 data-i18n="privacy">Privacy first</h3><p data-i18n="privacy_desc">Your QR content stays in the browser during normal generation.</p></article>
+        <article class="feature-card"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></span><h3 data-i18n="mobile">Mobile ready</h3><p data-i18n="mobile_desc">Responsive controls and preview work comfortably on phones and tablets.</p></article>
+      </div>
+    </section>
+
+    <section class="faq container" id="faq">
+      <div class="section-heading centered"><span class="eyebrow" data-i18n="faq_eyebrow">FAQ</span><h2 data-i18n="faq_title">Common questions</h2></div>
+      <details><summary data-i18n="faq_free">Is the QR generator really free?</summary><p data-i18n="faq_free_a">Yes. This version has no login or payment flow. It generates QR codes directly in the browser.</p></details>
+      <details><summary data-i18n="faq_store">Do you store my QR content?</summary><p data-i18n="faq_store_a">No backend is included. The page creates the QR locally in your browser.</p></details>
+      <details><summary>Can I use the downloaded QR commercially?</summary><p>The generated QR image itself can generally be used for your project, but verify the license of any third-party library or asset you use in your final deployment.</p></details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner"><span>© 2026 QR Studio</span><span>Free QR Code Generator</span></div>
+  </footer>
+</body>
+</html>
