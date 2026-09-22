@@ -31,11 +31,11 @@
       height: 90
     },
     socialBar: {
-      src: 'https://pl31447937.profitableratecpmnetwork.com/42afed4f88c46680e41a8f443196b41f/invoke.js',
-      container: 'container-42afed4f88c46680e41a8f443196b41f'
+      src: 'https://pl31447936.profitableratecpmnetwork.com/64/d9/b3/64d9b3c2ea301c8e56e1f20a75051f86.js'
     },
     nativeBanner: {
-      src: 'https://pl31447936.profitableratecpmnetwork.com/64/d9/b3/64d9b3c2ea301c8e56e1f20a75051f86.js'
+      src: 'https://pl31447937.profitableratecpmnetwork.com/42afed4f88c46680e41a8f443196b41f/invoke.js',
+      container: 'container-42afed4f88c46680e41a8f443196b41f'
     }
   };
 
@@ -111,6 +111,11 @@
     const host = hosts[0];
     host.dataset.adProvider = 'adsterra';
     host.dataset.adStatus = 'loading';
+    const container = document.createElement('div');
+    container.id = units.nativeBanner.container;
+    container.style.width = '100%';
+    container.style.minHeight = '100px';
+    host.appendChild(container);
     const ok = await loadScript(units.nativeBanner.src, { parent: host });
     host.dataset.adStatus = ok ? 'loaded' : 'error';
     for (const extra of hosts.slice(1)) {

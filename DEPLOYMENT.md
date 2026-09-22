@@ -55,3 +55,21 @@ The supplied Adsterra units are integrated in `ads.js`:
 - Native Banner
 
 The codes are loaded asynchronously after the application becomes interactive. QR generation does not await or depend on ad network success. The exact `ads.txt` seller record must still be copied from the Adsterra publisher account; it is intentionally not fabricated in this repository.
+
+## Vercel blank-page hardening (September 2026)
+
+If a deployment previously showed a blank white page, use the current package and redeploy from the repository root.
+
+The production bundle was syntax-validated after the Adsterra integration. The Vercel build serves `dist/`, while the server-side `api/config.js` remains outside `dist/` so Vercel can treat it as a function.
+
+Required Vercel settings:
+- Framework Preset: Other / None
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Root Directory: the folder containing `package.json`
+
+After deployment, verify:
+- `/` loads the application
+- `/ads.txt` returns the deployed text file (this project does not invent an Adsterra seller record)
+- `/api/config` returns JSON when the Vercel function is active
+- browser DevTools Console has no main-bundle syntax error

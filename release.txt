@@ -1,0 +1,7 @@
+FreeQRStudio Adsterra deployment hotfix
+- Fixed invalid main JavaScript bundle that caused a blank page after Vercel deployment.
+- Corrected Adsterra Social Bar / Native Banner script mapping.
+- Native Banner container is created with the supplied Adsterra container ID.
+- Kept API function outside dist so Vercel can deploy it as a function.
+- Removed stale /r/:id rewrite because no corresponding API route exists in this package.
+- Final main bundle and ads.js syntax validated locally.
