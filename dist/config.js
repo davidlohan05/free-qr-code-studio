@@ -1,0 +1,2 @@
+/* Public runtime configuration loader. Secrets are never returned. */
+window.FQS_CONFIG_READY=fetch('/api/config',{credentials:'same-origin'}).then(r=>r.ok?r.json():Promise.reject(new Error('Configuration unavailable'))).then(c=>{window.FQS_CONFIG={SUPABASE_URL:c.supabaseUrl,SUPABASE_ANON_KEY:c.supabaseAnonKey};window.FQS_AD_CONFIG={enabled:c.adsEnabled,scriptUrl:'',publisherId:''};return window.FQS_CONFIG;}).catch(()=>{window.FQS_CONFIG={SUPABASE_URL:'',SUPABASE_ANON_KEY:''};window.FQS_AD_CONFIG={enabled:false,scriptUrl:'',publisherId:''};return window.FQS_CONFIG;});

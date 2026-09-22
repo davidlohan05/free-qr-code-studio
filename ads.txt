@@ -1,0 +1,2 @@
+# Adsterra ads.txt entry must be copied exactly from your Adsterra publisher account.
+# Do not invent or modify the seller/publisher record.

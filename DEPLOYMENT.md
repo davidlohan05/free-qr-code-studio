@@ -1,35 +1,57 @@
-# FreeQRStudio — Deployment
+# FreeQRStudio — GitHub/Vercel Deployment
 
-## Current architecture
-This ZIP is a static single-page application. It contains no package manager metadata,
-server API, database, authentication layer, or dynamic-QR backend.
+## 1. GitHub
+Commit the project without `.env` files or real credentials.
 
-## GitHub
-1. Create a repository.
-2. Upload the project files.
-3. Do not commit real credentials.
-4. Keep `.env.example` as the configuration template.
+## 2. Supabase
+1. Create a Supabase project.
+2. Run `supabase/schema.sql`.
+3. Enable email/password authentication as required by your account policy.
+4. Copy the project URL, anon key and service-role key into Vercel environment variables.
 
-## Vercel
-Import the GitHub repository into Vercel as a static project.
+## 3. Vercel
+Import the repository. Vercel will use `npm run build` and `dist` for static output while serving `/api/*` as serverless functions.
 
-- Framework preset: Other / static
-- Build command: none
-- Output directory: `.`
-- Production branch: your chosen release branch
+Required environment variables:
+```text
+SUPABASE_URL
+SUPABASE_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY
+IP_HASH_SALT
+PUBLIC_BASE_URL
+```
 
-The included `vercel.json` provides SPA routing and basic response headers.
+Optional:
+```text
+ADS_ENABLED=false
+```
 
-## Custom domain
-Add the domain in Vercel, then follow the DNS records Vercel provides. Do not claim
-DNS or HTTPS is configured until the live deployment has been verified.
+## 4. Production smoke tests
+After deployment test:
+- `/`
+- QR generation in browser
+- PNG/SVG/PDF export
+- `/auth.html` signup/sign-in
+- `/dashboard.html`
+- create a dynamic QR
+- open `/r/<id>` from a separate device/network
+- confirm redirect and scan count
+- confirm unauthenticated API calls are rejected
+- confirm service-role key never appears in page source
 
-## Google Search Console
-After the production domain is live:
-1. Verify the property.
-2. Submit `/sitemap.xml`.
-3. Inspect the homepage.
-4. Request indexing.
-5. Review coverage and Core Web Vitals.
+## 5. Domain/SEO
+Replace `YOUR_DOMAIN` in `sitemap.xml` and `robots.txt`, and confirm canonical/Open Graph URLs match the live domain.
 
-These are user/account actions and are not verified by this local package audit.
+## 6. Ads
+Only enable ads after the publisher account is approved and the exact script/publisher configuration is known. Keep ads asynchronous and verify that QR generation continues when the ad network fails.
+
+## Adsterra integration
+
+The supplied Adsterra units are integrated in `ads.js`:
+- Banner 300x250
+- Banner 728x90
+- Popunder
+- Social Bar
+- Native Banner
+
+The codes are loaded asynchronously after the application becomes interactive. QR generation does not await or depend on ad network success. The exact `ads.txt` seller record must still be copied from the Adsterra publisher account; it is intentionally not fabricated in this repository.

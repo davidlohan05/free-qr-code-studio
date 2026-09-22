@@ -1,0 +1,2 @@
+FreeQRStudio production build
+Built: 2026-09-22T15:06:42.959Z

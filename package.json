@@ -1,0 +1,10 @@
+{
+  "name": "free-qr-studio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "qa": "node scripts/qa.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

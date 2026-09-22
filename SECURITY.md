@@ -1,11 +1,12 @@
 # Security Notes
 
 - No real credentials are included.
-- The application is client-side/static.
-- QR generation currently depends on an external QR library CDN.
-- Third-party advertising scripts are present and should be reviewed against the
-  applicable network policy and privacy requirements before production use.
-- The project does not contain a backend for authentication, dynamic QR records,
-  scan analytics, or protected API routes.
-- The current `vercel.json` enables `nosniff`, strict-origin referrer policy, and
-  `SAMEORIGIN` framing protection.
+- Supabase service-role credentials are server-only.
+- Dynamic QR targets accept only HTTP(S) URLs.
+- Dynamic redirect responses are not cached.
+- Scan IPs are salted/hashed before persistence.
+- Security headers include nosniff, strict-origin referrer policy, SAMEORIGIN framing protection, Permissions-Policy and COOP.
+- Authenticated dashboard/API access requires a Supabase bearer token.
+- Scan events are not directly readable by anonymous/authenticated browser clients.
+- Advertising is disabled by default and loaded asynchronously only when explicitly configured.
+- Final legal/privacy review remains required for the actual operator, jurisdiction and third-party services.
